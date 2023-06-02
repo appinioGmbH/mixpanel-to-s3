@@ -43,15 +43,13 @@ resource "aws_iam_role" "deployer" {
 EOF
 }
 
-resource "aws_iam_policy_attachment" "readonly_ec2" {
-  name       = "ReadOnlyEC2"
-  roles      = [aws_iam_role.deployer.name]
+resource "aws_iam_role_policy_attachment" "readonly_ec2" {
+  role       = aws_iam_role.deployer.name
   policy_arn = "arn:aws:iam::aws:policy/AmazonEC2ReadOnlyAccess"
 }
 
-resource "aws_iam_policy_attachment" "readonly_ecr" {
-  name       = "ReadOnlyECR"
-  roles      = [aws_iam_role.deployer.name]
+resource "aws_iam_role_policy_attachment" "readonly_ecr" {
+  role       = aws_iam_role.deployer.name
   policy_arn = "arn:aws:iam::aws:policy/AmazonEC2ContainerRegistryReadOnly"
 }
 
